@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/sakisds/gigahertzor/coordinates"
+	"github.com/sakisds/go-srtm/coordinates"
 )
 
 // SquareSize The size of each row and column in the SRTM files

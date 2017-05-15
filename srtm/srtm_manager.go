@@ -1,9 +1,9 @@
 package SRTM
 
 import (
-	"github.com/sakisds/gigahertzor/coordinates"
-	"io/ioutil"
 	"fmt"
+	"github.com/sakisds/go-srtm/coordinates"
+	"io/ioutil"
 	"path/filepath"
 )
 
@@ -80,7 +80,7 @@ func (manager Manager) GetElevation(point coordinates.Point) (elevation int, err
 	// The file might already be loaded so let's check
 	_, loaded := manager.files[filename]
 	if !loaded {
-		file, err := LoadFile(filepath.Join(manager.dataStore, filename + ".hgt"))
+		file, err := LoadFile(filepath.Join(manager.dataStore, filename+".hgt"))
 		if err != nil {
 			return -1, err
 		}

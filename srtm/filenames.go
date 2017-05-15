@@ -2,8 +2,8 @@ package SRTM
 
 import (
 	"fmt"
+	"github.com/sakisds/go-srtm/coordinates"
 	"strconv"
-	"github.com/sakisds/gigahertzor/coordinates"
 )
 
 // FilenameLengthError Error thrown when a .hgt file has an invalid name due to length
