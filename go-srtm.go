@@ -30,6 +30,7 @@ func main() {
 	// Elevation API
 	api.InitElevation(*cfg)
 	http.HandleFunc("/elevation", api.HandleElevation)
+	http.HandleFunc("/elevationPath", api.HandleElevationPath)
 
 	// Start server
 	log.Fatal(http.ListenAndServe(fmt.Sprintf("%s:%s", address, port), nil))

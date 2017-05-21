@@ -85,3 +85,50 @@ func HandleElevation(w http.ResponseWriter, r *http.Request) {
 
 	encoder.Encode(elevationArray)
 }
+
+func HandleElevationPath(w http.ResponseWriter, r *http.Request) {
+	encoder := json.NewEncoder(w)
+
+	// Check if the user passed the two parameters
+	urlQuery := r.URL.Query()
+
+	fromStr := urlQuery["from"]
+	if len(fromStr) == 0 {
+		apiError := Error{Name: "parameter_missing", Description: "Parameter 'from' not optional", Data: nil}
+		encoder.Encode(apiError)
+		return
+	}
+
+	toStr := urlQuery["to"]
+	if len(toStr) == 0 {
+		apiError := Error{Name: "parameter_missing", Description: "Parameter 'to' not optional", Data: nil}
+		encoder.Encode(apiError)
+		return
+	}
+
+	// Parse the two locations
+	locations := parseLocationsString(fromStr[0] + "|" + toStr[0])
+	if len(locations) != 2 {
+		apiError := Error{Name: "invalid_location", Description: "Could not parse locations", Data: nil}
+		encoder.Encode(apiError)
+		return
+	}
+
+	// Get the elevation data for a path connecting the two points
+	count := int(locations[0].DistanceTo(locations[1]) / 30) // One elevation point every 30m
+	step := 1 / float64(count)
+	elevationData := make([]int, 0, count)
+
+	for i := 0; i < count; i++ {
+		currentPoint := coordinates.Lerp(locations[0], locations[1], float64(i)*step)
+		elevation, err := srtmManager.GetElevation(currentPoint)
+		if err == nil {
+			elevationData = append(elevationData, elevation)
+		} else {
+			elevationData = append(elevationData, -1)
+		}
+	}
+
+	// Return to client as a JSON array
+	encoder.Encode(elevationData)
+}
