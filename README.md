@@ -4,9 +4,9 @@ Shuttle Radar Topography Mission (SRTM) is an international research effort to c
 `go-srtm` only works with raw one arc-second data files (.hgt, 3601x3601). Each file should be 25,934,402 bytes.
 
 ## How to run
+You can use `go get github.com/sakisds/go-srtm` to grab the sources and compile a binary. `go-srtm` doesn't have any external dependencies.
 
 ## API Documentation
-You can use `go get github.com/sakisds/go-srtm` to grab the sources and compile a binary. `go-srtm` doesn't have any external dependencies.
 
 ### /elevation
 This endpoint returns the elevation value for a set of coordinates
