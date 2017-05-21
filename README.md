@@ -6,6 +6,7 @@ Shuttle Radar Topography Mission (SRTM) is an international research effort to c
 ## How to run
 
 ## API Documentation
+You can use `go get github.com/sakisds/go-srtm` to grab the sources and compile a binary. `go-srtm` doesn't have any external dependencies.
 
 ### /elevation
 This endpoint returns the elevation value for a set of coordinates
