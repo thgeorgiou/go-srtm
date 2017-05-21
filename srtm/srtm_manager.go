@@ -57,6 +57,19 @@ func CreateManager(dataStore string) (manager Manager, err error) {
 	return manager, nil
 }
 
+// GetCoverage returns the list of SRTM files available
+func (manager Manager) GetCoverage() (filenames []string) {
+	filenames = make([]string, 0, len(manager.coverage))
+
+	for filename, isAvailable := range manager.coverage {
+		if isAvailable {
+			filenames = append(filenames, filename)
+		}
+	}
+
+	return
+}
+
 // IsDataAvailable returns true if the given coordinates are covered by the data of this SRTM manager. It also returns
 // the filename that is supposed to contain the requested data
 func (manager Manager) IsDataAvailable(point coordinates.Point) (availability bool, filename string) {
