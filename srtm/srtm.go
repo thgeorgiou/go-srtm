@@ -3,11 +3,10 @@ package SRTM
 import (
 	"errors"
 	"fmt"
+	"github.com/sakisds/go-srtm/coordinates"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-
-	"github.com/sakisds/go-srtm/coordinates"
 )
 
 // SquareSize The size of each row and column in the SRTM files
